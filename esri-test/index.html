@@ -31,12 +31,15 @@
         const map = new Map({
           basemap: "gray-vector"
         });
+        const urlParams = new URLSearchParams(window.location.search);
+        const lat = urlParams.get('lat') || 46.36802482681416;
+        const lon = urlParams.get('lon') || 24.968799045783545;
 
         const view = new MapView({
           container: "viewDiv",
           map: map,
           zoom: 6,
-          center: [46.36802482681416, 24.968799045783545]
+          center: [lat, lon]
         });
 
         // add the button for the draw tool
