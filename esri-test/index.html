@@ -25,7 +25,8 @@
         "esri/views/MapView",
         "esri/views/draw/Draw",
         "esri/Graphic",
-        "esri/geometry/geometryEngine"
+        "esri/geometry/geometryEngine",
+        "esri/geometry/support/webMercatorUtils"
       ], (Map, MapView, Draw, Graphic, geometryEngine) => {
         const map = new Map({
           basemap: "gray-vector"
@@ -78,7 +79,12 @@
         };
 
         function final(event) {
-          alert(JSON.stringify(event.vertices))
+          let result =  [];
+          for (let i of event.vertices) {
+              result.push(webMercatorUtils.xyToLngLat(i[0],i[1]));
+          }
+          console.log(JSON.stringify(result));
+          alert(JSON.stringify(result))
         }
 
         // Checks if the last vertex is making the line intersect itself.
